@@ -1,0 +1,34 @@
+server:
+  port: 9011
+  context-path: /
+  token:
+    timeout: 1800000
+security:
+  basic:
+    enabled: false
+spring:
+  datasource:
+    url: jdbc:mysql://rds150bvcm81u49g72sni.mysql.rds.aliyuncs.com:3306/zserp?characterEncoding=UTF8
+    username: zserp
+    password: zserp123
+    driver: com.mysql.jdbc.Driver
+  application:
+    name: atme-attendance
+dubbo:
+  zookeeper: zookeeper://10.172.164.48:2181
+
+profiles:
+  active: attendance
+  secret: 7786df7fc3a34e26a61c034d5ec8245d
+
+config:
+  auth: true
+  filter: true
+  filterUrl: /user/signToken,/user/refreshToken,/user/getDdConfig,/leave/getLeaveHour,/upload/uploadFile,.js,.css,.png,.jpg,.html,.ico
+  ligiaUrl: http://fc-auditing.atme8.com/weixinweb/TestServlet
+
+qiniu:
+  accessKey: T2M1Hil4fCCzEkiDHJSSf4VUC85rMuLxgryZ9aKx
+  secretKey: wBBx420puQWwqOMNMmnfiLYxNPIIzCbarHT7h5Nf
+  bucket: mobile-honeycomb
+  url: https://mobile-honeycomb.atme8.com/

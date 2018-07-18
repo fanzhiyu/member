@@ -1,0 +1,31 @@
+server:
+  port: 8085
+  context-path: /
+  token:
+    timeout: 1200000
+security:
+  basic:
+    enabled: false
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/jeesite_20170808?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password:
+    driver: com.mysql.jdbc.Driver
+  application:
+    name: member
+
+profiles:
+  active: member
+  secret: 7786df7fc3a34e26a61c034d5ec8245d
+
+config:
+  auth: false
+  filter: false
+  filterUrl: /user/signToken,.js,.css,.png,.jpg,.html,.ico
+
+qiniu:
+  accessKey: v5mdxW_QsSCmIuiMnqIbvWOHNvuBcq78fRnd604e
+  secretKey: ZPRFvxc84-41VPusVxgccx3JEG1342AvezP5GKde
+  bucket: damon
+  url: http://oupq1rfmo.bkt.clouddn.com/

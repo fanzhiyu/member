@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.member</groupId>
+        <artifactId>member</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.member</groupId>
+    <artifactId>member-controller</artifactId>
+
+    <name>member-controller</name>
+    <description>member</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.member</groupId>
+            <artifactId>member-service</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>com.member.generate.Generate</mainClass>
+                            <arguments>
+                                <argument>
+                                    {
+                                    "js" : "false",
+                                    "sourceFile": "src/main/resources/static/js/commons/commons.js",
+                                    "targetFile": "main.js",
+                                    "sourceProject": "/pk-controller",
+                                    "filePath": "static/js",
+                                    "sql": "true",
+                                    "tableFile": "config/table.xml",
+                                    "generateConfigFile": "config/genetatorConfig.properties",
+                                    "mysqJarFile": "/Users/apple/.m2/repository/mysql/mysql-connector-java/5.1.27/mysql-connector-java-5.1.27.jar",
+                                    "yml": "${env}"
+                                    }
+                                </argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <env>config/application-dev</env>
+            </properties>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <env>config/application-test</env>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <env>config/application-prod</env>
+            </properties>
+        </profile>
+    </profiles>
+</project>

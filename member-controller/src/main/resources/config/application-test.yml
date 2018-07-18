@@ -1,0 +1,34 @@
+server:
+  port: 9090
+  context-path: /
+  token:
+    timeout: 1800000
+security:
+  basic:
+    enabled: false
+spring:
+  datasource:
+    url: jdbc:mysql://192.168.0.12:3306/zskxtest?useUnicode=true&charaterEncoding=utf8
+    username: zserp
+    password: zserp
+    driver: com.mysql.jdbc.Driver
+  application:
+    name: atme-attendance
+dubbo:
+  zookeeper: zookeeper://192.168.0.27:2181
+
+profiles:
+  active: attendance
+  secret: 7786df7fc3a34e26a61c034d5ec8245d
+
+config:
+  auth: true
+  filter: true
+  filterUrl: /user/signToken,/user/refreshToken,/user/getDdConfig,/leave/getLeaveHour,/upload/uploadFile,.js,.css,.png,.jpg,.html,.ico
+  ligiaUrl: http://ligia.dev.taxhoo.com/weixinweb/TestServlet
+
+qiniu:
+  accessKey: Y_GjL39haypSYJ-cUZWdfqEAZex6XidfAeD1VvNn
+  secretKey: PkiimO1g792wEKufNJkWOlrVhulAEnwFQd7AQulD
+  bucket: orgmgr
+  url: http://ozpgv6wm8.bkt.clouddn.com/

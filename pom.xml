@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.member</groupId>
+    <artifactId>member</artifactId>
+    <packaging>pom</packaging>
+    <version>0.0.1-SNAPSHOT</version>
+    <modules>
+        <module>member-core</module>
+        <module>member-dao</module>
+        <module>member-service</module>
+        <module>member-controller</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.7</java.version>
+        <druid.version>1.0.2</druid.version>
+        <gson.version>1.7.1</gson.version>
+        <json-lib.version>2.4</json-lib.version>
+        <fastjson.version>1.2.17</fastjson.version>
+        <framework.version>0.0.1-SNAPSHOT</framework.version>
+        <json-lib.version>2.4</json-lib.version>
+        <member.version>0.0.1-SNAPSHOT</member.version>
+        <easy.version>0.0.1-SNAPSHOT</easy.version>
+        <ddsdk.version>1.0.0-SNAPSHOT</ddsdk.version>
+        <google.thumbnailator.version>0.4.8</google.thumbnailator.version>
+        <commons.lang3.version>3.6</commons.lang3.version>
+    </properties>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.7.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.member</groupId>
+                <artifactId>member-dao</artifactId>
+                <version>${member.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.member</groupId>
+                <artifactId>member-core</artifactId>
+                <version>${member.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.member</groupId>
+                <artifactId>member-service</artifactId>
+                <version>${member.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.framework</groupId>
+                <artifactId>framework-mybatis</artifactId>
+                <version>${framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.framework</groupId>
+                <artifactId>framework-spring</artifactId>
+                <version>${framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.easy.core</groupId>
+                <artifactId>easy-core</artifactId>
+                <version>${easy.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>${gson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.sf.json-lib</groupId>
+                <artifactId>json-lib</artifactId>
+                <classifier>jdk15</classifier>
+                <version>${json-lib.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.coobird</groupId>
+                <artifactId>thumbnailator</artifactId>
+                <version>${google.thumbnailator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons.lang3.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <distributionManagement>
+        <repository>
+            <id>nexus-releases</id>
+            <name>Internal Release Repository</name>
+            <url>http://nexus.dev.taxhoo.com/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <name>Internal Snapshot Repository</name>
+            <url>http://nexus.dev.taxhoo.com/repository/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+</project>
