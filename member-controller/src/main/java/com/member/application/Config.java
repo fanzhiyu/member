@@ -2,6 +2,7 @@ package com.member.application;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.easy.core.util.JwtUtil;
+import com.easy.core.util.UserUtils;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -20,10 +21,10 @@ import javax.sql.DataSource;
  * Created by apple on 17/12/18.
  */
 @Configuration
-@ComponentScan(basePackages = {"com.pk.api.*.controller","com.pk.api.*.dao.*",
-        "com.pk.api.*.service.*"})
+@ComponentScan(basePackages = {"com.member.*.controller","com.member.*.dao.*",
+        "com.member.*.service.*"})
 @EnableTransactionManagement
-public class PkConfig {
+public class Config {
 
     @Autowired
     private DatasourceBean datasourceBean;
@@ -43,7 +44,7 @@ public class PkConfig {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource());
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath*:/com/pk/api/**/dao/*.xml"));
+        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath*:/com/member/**/dao/*.xml"));
         return sqlSessionFactoryBean.getObject();
     }
 
@@ -60,6 +61,11 @@ public class PkConfig {
     @Bean
     public JwtUtil jwtUtil(){
         return new JwtUtil();
+    }
+
+    @Bean
+    public UserUtils userUtils() {
+        return new UserUtils();
     }
 
 }

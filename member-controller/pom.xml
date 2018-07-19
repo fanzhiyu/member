@@ -45,7 +45,7 @@
                                     "js" : "false",
                                     "sourceFile": "src/main/resources/static/js/commons/commons.js",
                                     "targetFile": "main.js",
-                                    "sourceProject": "/pk-controller",
+                                    "sourceProject": "/member-controller",
                                     "filePath": "static/js",
                                     "sql": "true",
                                     "tableFile": "config/table.xml",

@@ -1,6 +1,8 @@
 package com.member.user.service;
 
 import com.easy.core.exception.MessageException;
+import com.member.user.model.SaveUserModel;
+import com.member.user.model.TokenModel;
 import com.member.user.model.UserModel;
 
 /**
@@ -9,10 +11,18 @@ import com.member.user.model.UserModel;
 public interface UserService {
 
     /**
-     * 签订token
+     * 登陆
      * @param userModel
      * @return
      * @throws MessageException
      */
-    public UserModel signToken(UserModel userModel) throws MessageException;
+    public TokenModel login(UserModel userModel) throws MessageException;
+
+
+    /**
+     * 保存
+     * @param saveUserModel
+     * @throws MessageException
+     */
+    public void saveUser(SaveUserModel saveUserModel) throws MessageException;
 }

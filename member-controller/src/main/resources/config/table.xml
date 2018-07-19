@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RESULT>
-	<table name="SYS_USER" generate="false"/>
+	<table name="sys_user" generate="false"/>
+	<table name="sys_member" generate="false"/>
+	<table name="sys_rule" generate="false"/>
+	<table name="sys_impulse" generate="false"/>
+	<table name="sys_consume" generate="false"/>
 </RESULT>

@@ -23,7 +23,7 @@ public class ControllerAdvice {
     public ResponseEntity<Object> errorHandler(Exception ex) {
         ex.printStackTrace();
         logger.error(ex.getMessage());
-        return ResponseUtil.exception(Manager.getMessage(MemberMessage.PK1002));
+        return ResponseUtil.exception(Manager.getMessage(MemberMessage.MEB1002));
     }
 
     /**
@@ -44,7 +44,7 @@ public class ControllerAdvice {
      */
     @ExceptionHandler(value = ExpiredJwtException.class)
     public ResponseEntity<Object>  expiredJwtException(){
-        return ResponseUtil.customSuccess(Constant.TOKEN_INVALID, Manager.getMessage(MemberMessage.PK1003));
+        return ResponseUtil.customSuccess(Constant.TOKEN_INVALID, Manager.getMessage(MemberMessage.MEB1003));
     }
 
     /**
@@ -66,6 +66,6 @@ public class ControllerAdvice {
     public ResponseEntity<Object> mySQLSyntaxErrorException(BadSqlGrammarException e){
         e.printStackTrace();
         logger.error(e.getMessage());
-        return ResponseUtil.customError(Constant.SYS_ERROR_CODE, Manager.getMessage(MemberMessage.PK1004));
+        return ResponseUtil.customError(Constant.SYS_ERROR_CODE, Manager.getMessage(MemberMessage.MEB1004));
     }
 }
