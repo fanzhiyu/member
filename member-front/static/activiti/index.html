@@ -1,0 +1,35 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登陆</title>
+    <script src="/lib/js/jquery-1.10.2.min.js"></script>
+    <script>
+        function login(){
+            $.ajax({
+                url:"http://192.168.0.244:8091/user/getToken",
+                type:"get",
+                data:{
+                    username: $("#username").val(),
+                    pwd : $("#pwd").val()
+                },
+                success: function(data){
+                    var json = eval("("+data+")");
+                    localStorage.setItem("token",json.token)
+                    window.location.href="model-list.html";
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+<div id="top">
+</div>
+<h2>登陆</h2>
+<hr>
+用户名：<input type="text" name="username" id="username"/><br />
+密 码：<input type="text" name="pwd" id="pwd" />
+<input type="button" onclick="login()" value="登陆"/>
+</body>

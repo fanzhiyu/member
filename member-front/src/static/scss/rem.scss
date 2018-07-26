@@ -1,0 +1,4 @@
+$font-size: 40;
+@function pr($px) {
+    @return $px / $font-size * 1rem;
+}

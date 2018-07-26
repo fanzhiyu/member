@@ -1,0 +1,345 @@
+@charset "utf-8";
+@import "../scss/rem";
+$colorF: #fff;
+$colorFa: #fafafa;
+$colorF0: #f0f0f0;
+$colorF5f4f9: #f5f4f9;
+$colorF8: #f8f8f8;
+$colorE: #eee;
+$colorB: #bbb; // 灰色border
+$colorC: #ccc; //  次要字体color
+$colorC7: #c7c7c7;
+$colorC8: #c8c8c8;
+$colorDc: #dcdcdc;
+$color9: #999; //  次要字体color
+$color6: #666;
+$color3: #333; //  主要字体color
+$colorF1f2fa: #f1f2fa;
+$colorF2f9ee: #f2f9ee;
+$colorF3f9fe: #f3f9fe;
+$colorDfedfc: #dfedfc;
+$colorD9eddf: #b9eddf;
+$color9bd6ff: #9bd6ff;
+$color61a7f2: #61a7f2; // 蓝色border
+$colorA3acf0: #a3acf0;
+$color8995f1: #8995f1;
+$color3296e6: #3296e6;
+$colorBeeba7: #beeba7;
+$color9ccc65: #9ccc65;
+$color00c89d: #00c89d;
+$color7fc25d: #7fc25d;
+$color2baf2b: #2baf2b;
+$colorFfb93d: #ffb93d;
+$colorffb93d: #ffb93d;
+$colorff0000: #ff0000;
+$colorFf3333: #ff3333;
+$colore9454b: #e9454b;
+$colore84e40: #e84e40;
+$colorff7043: #ff7043;
+$color166199: #166199;
+$color8f2f2f: #8f2f2f;
+.color5cbbb3 {
+    background-color: #5cbbb3 !important;
+}
+
+.colorff5364 {
+    background-color: #ff5364 !important;
+}
+
+.color78c06e {
+    background-color: #78c06e !important;
+}
+
+.coloraa6ec0 {
+    background-color: #aa6ec0 !important;
+}
+
+.color5672b2 {
+    background-color: #5672b2 !important;
+}
+
+.coloree9731 {
+    background-color: #ee9731 !important;
+}
+
+// @mixin border-radius($radius){
+//     -webkit-border-radius: $radius;
+//     border-radius: $radius;
+// }
+// .box {
+//     @include border-radius(3px);//调用混合宏并给混合宏传参数“3px”
+// }
+
+
+// @mixin size($width,$height){
+//     width: $width;
+//     height: $height;
+// }
+// .box-center {
+//     @include size(500px,300px);
+// }
+
+
+// @mixin rounded-corners {
+//   -moz-border-radius: 5px;
+//   -webkit-border-radius: 5px;
+//   border-radius: 5px;
+// }
+
+// notice {
+//   @include rounded-corners;
+// }
+
+
+
+// 按钮点击效果样式
+@mixin active-button($width,$height,$bgcolor,$actbgcolor,$color){
+    box-sizing: border-box;
+    width: $width;
+    height: pr($height);
+    padding: pr(10) 0;
+    line-height: pr(34);
+    text-align: center;
+    color: $color;
+    font-size: pr(17);
+    font-family: "微软雅黑";
+    border: none;
+    position: relative;
+    background-color: $bgcolor;
+    border: none;
+    display: block;
+    color: $color;
+    overflow: hidden;
+    &::after{
+        position: absolute;
+        background-color: $actbgcolor;
+        content: " ";
+        opacity: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+    &:active::after{
+        opacity: .4;
+    }
+}
+
+// 列表共通样式
+@mixin list($liHeight,$liPadd,$fontsize){
+    width: 100%;
+    background: #fff;
+    padding: 0;
+    box-sizing: border-box;
+    li{
+        box-sizing: border-box;
+        height: pr($liHeight);
+        line-height: pr($liHeight);
+        padding: $liPadd;
+        background-color: #fff;
+        overflow: hidden;
+        font-size: pr($fontsize);
+        overflow: hidden;
+        position: relative;
+        &::after{
+            position: absolute;
+            background-color: #eee;
+            content: " ";
+            opacity: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+        &:active::after{
+            opacity: .4;
+        }
+        &::before{
+            content: '';
+            position: absolute;
+            bottom: 0;
+            background: #eee;
+            width: 100%;
+            height: 1px;
+            -webkit-transform: scaleY(0.5);
+            transform: scaleY(0.5);
+            -webkit-transform-origin: 0 0;
+            transform-origin: 0 0;
+        }
+    }
+    li:last-child{
+            &::before{
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 0;
+        }
+    }
+}
+
+
+// 1px 下border
+.scale-1px{
+  position: relative;
+  overflow: hidden;
+  border:none;
+}
+.scale-1px:after{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  background: #000;
+  width: 100%;
+  height: 1px;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+}
+
+// tab切换共通
+@mixin tab($height,$fontSize,$bgColor,$actBgColor,$actBorColor,$position){
+        box-sizing: border-box;
+        display: flex;
+        position: $position;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: pr($height);
+        padding: 0;
+        margin-top: 0;
+        background-color: $bgColor;
+        line-height: pr($height);
+        z-index: 99;
+        li{
+            box-sizing: border-box;
+            padding: pr(5) 0;
+            flex: 1;
+            font-size: pr($fontSize);
+            line-height: pr($height - 10);
+            color: $color9;
+            //font-family: "微软雅黑";
+            text-align: center;
+            background: $bgColor;
+            /*tab被选中样式*/
+            &.selected {
+                color: $actBorColor;
+                border-bottom: 2px solid $actBorColor;
+                background: $actBgColor;
+            }
+            &:nth-of-type(2) {
+                border-left: 1px solid #eee;
+                border-right: 1px solid #eee;
+            }
+        }
+
+}
+
+
+// 气泡
+@mixin bubble(){
+            .actionBar {
+            padding: pr(5) 0 0 0;
+            overflow: hidden;
+            .actionButton {
+                float: right;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: pr(30);
+                height: pr(17);
+                border-radius: pr(4);
+                background: #dfedfc;
+                .placeholder {
+                    height: pr(2);
+                    width: pr(2);
+                    margin: 0 pr(2);
+                    background: #fff;
+                }
+            }
+            .animated {
+                -webkit-animation-duration: 0.2s;
+                animation-duration: 0.2s;
+                -webkit-animation-fill-mode: both;
+                animation-fill-mode: both;
+            }
+            @-webkit-keyframes bounceInRight {
+                0% {
+                    opacity: 0;
+                    -webkit-transform: translateX(10px);
+                    transform: translateX(10px);
+                }
+                60% {
+                    opacity: 0.8;
+                    -webkit-transform: translateX(0px);
+                    transform: translateX(0px);
+                }
+                100% {
+                    opacity: 1;
+                    -webkit-transform: translateX(0);
+                    transform: translateX(0);
+                }
+            }
+            @keyframes bounceInRight {
+                0% {
+                    opacity: 0;
+                    -webkit-transform: translateX(10px);
+                    -ms-transform: translateX(10px);
+                    transform: translateX(10px);
+                }
+                60% {
+                    opacity: 0.8;
+                    -webkit-transform: translateX(0px);
+                    -ms-transform: translateX(0px);
+                    transform: translateX(0px);
+                }
+                100% {
+                    opacity: 1;
+                    -webkit-transform: translateX(0);
+                    -ms-transform: translateX(0);
+                    transform: translateX(0);
+                }
+            }
+            .bounceInRight {
+                -webkit-animation-name: bounceInRight;
+                animation-name: bounceInRight;
+            }
+            @-webkit-keyframes bounceOut {
+                0% {
+                    -webkit-transform: scale(1);
+                    transform: scale(1);
+                }
+                25% {
+                    -webkit-transform: scale(.95);
+                    transform: scale(.95);
+                }
+                50% {
+                    opacity: 1;
+                    -webkit-transform: scale(1.1);
+                    transform: scale(1.1);
+                }
+                100% {
+                    opacity: 0;
+                    -webkit-transform: scale(.3);
+                    transform: scale(.3);
+                }
+            }
+            .actionDisplay {
+                position: absolute;
+                bottom: pr(-8);
+                right: pr(40);
+                display: flex;
+                padding: pr(5) pr(10);
+                border-radius: pr(4);
+                background: #666666;
+                .withdrew,.delete {
+                    flex: 1;
+                    color: #fff;
+                    font-size: pr(14);
+                }
+                .withdrew {
+                    border: none;
+                }
+            }
+        }
+}

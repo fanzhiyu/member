@@ -1,0 +1,51 @@
+{
+  "EASY_ASSEMBLY": {
+    "button": "<li class='btns'><div class='icons'><i class='fa fa-${0}' title='${1}'></i></div></li>",
+    "shadow": "<div class='shadow'>${0}</div>",
+    "layout_button": "<li class='layout'><label>${1}</label><i class='fa fa-${0}'></i><div class='clearfix'></div></li>",
+    "layout_shadow": "<div class='layout-shadow'>${0}</div>"
+  },
+  "EASY_TAGS": {
+      "canvas": "<div class='canvas-right'><div class='canvas-header'><ul></ul></div><div class='canvas'><div class='seat'><div class='canvas-title'>${0}</div></div><div class='form'><form></form></div></div></div>",
+      "button": "<li><a href='javascript:;'>${0}</a></li>",
+      "left": "<div class='canvas-left'><div class='nature overflow'><div class='title'></div><ul class='content'></ul><ul class='assembly-content'></ul></div><div class='assembly'><div class='title'></div><ul></ul></div></div>",
+      "form_setting": "<label class='setting'>${0}</div>",
+      "assembly": "<label>${0}</label>",
+      "tags": "<div class='tags'><label class='label-text'>${0}：</label><div class='clearfix'></div></div>",
+      "form_title": "<div class='form-title'>${0}</div>",
+      "input": "<input type='text' name='textField' class='inputs'/>",
+      "textarea": "<textarea name=textareaField class='textarea'></textarea>",
+      "radio":"<div class='switch'><label class='radios'><input type='radio' name='radio' value='0' /><span></span></label><span class='values1'>${0}</span></div><div class='switch'><label class='radios'><input type='radio' value='1' name='radio' /><span></span></label><span class='values2'>${1}</span></div>",
+      "checkbox":"<label class='checkbox00' style='float:left'><input type='checkbox' name='checkbox' ><span></span></label>",
+      "select":"<div class='filter-box'><div class='filter-text'><input class='filter-title' type='text' readonly placeholder='pleace select' /><span class='icon-arrow'></span></div><select class='inputs' name='select'></select></div>",
+      "date": "<input type='text' name='date' onclick='onTime(this)' class='date inputs' readonly='true'/>",
+      "number": "<input type='number' name='number' class='inputs' />",
+      "money": "<input type='number' name='money' class='inputs' />",
+      "email": "<input type='text' name='email' class='inputs' check='ckEmail' />",
+      "mobile": "<input type='text' name='mobile' class='inputs' check='ckTel' />",
+      "file": "<input name='file' type='file' style='display: none'/><div class='file'><a href='javascript:;'>${0}</a></div>",
+      "save": "<div class='btn-saves'><input type='button' onclick='onSave(this)' value='${0}' /></div>",
+      "chancel": "<div class='btn-chancel'><input type='button' value='${0}' />",
+      "line":"<div class='line'></div>",
+      "layout":"<div class='layout'></div>",
+      "layout_column": "<div class='layout-column' style='width:${0}%'></div>",
+      "layout_delete": "<div class='layout-delete'><i class='fa fa-times' ></i>&nbsp;${0}</div>",
+      "select_option": "<option value='${0}' ${1} >${2}</option>",
+      "remove_tags": "<div class='remove-tags'><i class='fa fa-close'></i></div>",
+      "select_add":"<div class='select-add'><i class='fa fa-plus'></i></div>",
+      "popup":"<div class='popup'><div class='popup-window'><div class='title'>${0}</div><div class='popup-content' ></div><div class='popup-button'></div></div></div>",
+      "popup_close":"<div class='close'><i class='fa fa-close'></i></div>"
+  },
+  "EASY_PROPERTIES": {
+    "nature_li": "<li><label class='labels'>${0}：</label></li>",
+    "nature_number": "<input type='number' />",
+    "nature_text": "<input type='text' />",
+    "nature_textarea": "<textarea></textarea>",
+    "nature_span": "<span>px</span>",
+    "clearfix": "<div class='clearfix'></div>",
+    "option":"<div class='option-setting'><ul></ul></div>",
+    "option_li":"<li><div class='option'>${0}：<input type='text' /></div><div class='option'>${1}：<input type='text' /></div><div class='operate'></div></li><div class='clearfix'></div>",
+    "option_add":"<i class='fa fa-plus-circle'></i>",
+    "option_sub":"<i class='fa fa-minus-circle'></i>"
+  }
+}

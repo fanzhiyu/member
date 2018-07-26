@@ -1,0 +1,20 @@
+{
+  "EASY_ICON": {
+    "text": "edit",
+    "textarea": "files-o",
+    "switch": "dot-circle-o",
+    "checkbox": "check-square-o",
+    "select": "chevron-circle-down",
+    "date": "calendar",
+    "number": "calculator",
+    "money": "dollar",
+    "email": "envelope-o",
+    "mobile":"mobile",
+    "file":"paperclip",
+    "save":"save",
+    "chancel":"share",
+    "line": "minus",
+    "layout_th": "th",
+    "layout_list":"list"
+  }
+}
