@@ -20,6 +20,6 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.member.sys.dao" targetProject="/Users/apple/Documents/develop-git/member/member-dao/src/main/java">
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
-        <table tableName="sys_consume" domainObjectName="SysConsumeDomain" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
+        <table tableName="sys_member" domainObjectName="SysMemberDomain" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
     </context>
 </generatorConfiguration>

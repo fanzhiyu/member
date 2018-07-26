@@ -4,9 +4,14 @@ import com.easy.core.bean.UserBean;
 import com.easy.core.exception.MessageException;
 import com.easy.core.manager.Manager;
 import com.easy.core.util.DateUtils;
+import com.easy.core.util.EncryptionUtils;
 import com.easy.core.util.StringUtils;
 import com.easy.core.util.UserUtils;
-import com.member.core.contant.MemberMessage;
+import com.member.core.contsant.MemberConstant;
+import com.member.core.contsant.MemberMessage;
+import com.member.impulse.dao.ImpulseDao;
+import com.member.impulse.model.ImpulseModel;
+import com.member.impulse.service.ImpulseService;
 import com.member.member.dao.MemberDao;
 import com.member.member.domain.MemberDomain;
 import com.member.member.model.MemberModel;
@@ -16,6 +21,8 @@ import com.member.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Member;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +37,9 @@ public class MemberServiceImpl implements MemberService {
 
     @Autowired
     private UserUtils userUtils;
+
+    @Autowired
+    private ImpulseService impulseService;
 
     /**
      * 查找会员列表分页
@@ -57,6 +67,7 @@ public class MemberServiceImpl implements MemberService {
             model.setMemberTel(domain.getMemberTel());
             model.setMemberEmail(domain.getMemberEmail());
             model.setMemberAge(domain.getMemberAge());
+            model.setMemberAmount(StringUtils.isNotNull(domain.getMemberAmount()) ? String.valueOf(domain.getMemberAmount()) : "0.00");
             model.setMemberSex(domain.getMemberSex());
             model.setMemberBirthday(DateUtils.DateToStringFormat(domain.getMemberBirthday(),DateUtils.YYYY_MM_DD));
             model.setCreateTime(DateUtils.DateToStringFormat(domain.getCreateTime(),DateUtils.YYYY_MM_DD_HH_MM_SS));
@@ -93,22 +104,34 @@ public class MemberServiceImpl implements MemberService {
      */
     @Override
     public void saveMember(SaveMemberModel saveMemberModel) throws MessageException {
-        UserBean userBean = userUtils.getUser();
+        UserBean userBean = null;
+        try{
+            userBean = userUtils.getUser();
+        }catch (Exception e){}
         MemberDomain memberDomain = new MemberDomain();
         memberDomain.setMemberId(saveMemberModel.getMemberId());
         memberDomain.setMemberSex(saveMemberModel.getMemberSex());
         memberDomain.setMemberName(saveMemberModel.getMemberName());
         memberDomain.setMemberAge(saveMemberModel.getMemberAge());
+        memberDomain.setMemberTel(saveMemberModel.getMemberTel());
         memberDomain.setMemberEmail(saveMemberModel.getMemberEmail());
         memberDomain.setMemberBirthday(DateUtils.StringToDateFormat(saveMemberModel.getMemberBirthday(),DateUtils.YYYY_MM_DD));
-        memberDomain.setCreater(userBean.getUserCode());
+        memberDomain.setMemberHeader(saveMemberModel.getMemberHeaderImg());
+        memberDomain.setCreater(StringUtils.isNotNull(userBean)?userBean.getUserCode():null);
         memberDomain.setCreateTime(DateUtils.getSystemDate());
-        if(StringUtils.isNull(saveMemberModel.getMemberId())){
+        if(StringUtils.isNotNull(saveMemberModel.getMemberId())){
             memberDomain.setMemberId(saveMemberModel.getMemberId());
-            memberDomain.setUpdater(userBean.getUserCode());
+            memberDomain.setUpdater(StringUtils.isNotNull(userBean)?userBean.getUserCode():null);
             memberDomain.setUpdateTime(DateUtils.getSystemDate());
             memberDao.update(memberDomain);
         }else{
+            MemberDomain where = new MemberDomain();
+            where.setMemberTel(saveMemberModel.getMemberTel());
+            MemberDomain res = memberDao.findCondition(where);
+            if(StringUtils.isNotNull(res)){
+                throw new MessageException(Manager.getMessage(MemberMessage.MEB1011));
+            }
+            memberDomain.setMemberPassword(EncryptionUtils.md5Encode(saveMemberModel.getMemberPassword()));
             memberDomain.setRuleNumber(DateUtils.getYYmm());
             memberDao.insert(memberDomain);
         }
@@ -128,13 +151,49 @@ public class MemberServiceImpl implements MemberService {
     }
 
     /**
+     * 会员充值
+     * @param memberModel
+     * @throws MessageException
+     */
+    @Override
+    public void rechargeMember(MemberModel memberModel) throws MessageException {
+        UserBean userBean = null;
+        if(StringUtils.isNull(memberModel.getMemberId())){
+            userBean = userUtils.getUser();
+        }
+        MemberDomain memberDomain = new MemberDomain();
+        memberDomain.setMemberId(StringUtils.isNull(userBean) ? memberModel.getMemberId() : userBean.getUserCode());
+        MemberDomain resultDomain = memberDao.findCondition(memberDomain);
+        if(StringUtils.isNull(resultDomain)){
+            throw new MessageException(Manager.getMessage(MemberMessage.MEB1014));
+        }
+        if(StringUtils.isNull(memberModel.getAmount()) ||
+                (StringUtils.isNotNull(memberModel.getAmount()) && Integer.parseInt(memberModel.getAmount()) <= 0)){
+            throw new MessageException(Manager.getMessage(MemberMessage.MEB1015));
+        }
+
+        BigDecimal totalAmount = new BigDecimal(memberModel.getAmount());
+        if(StringUtils.isNotNull(resultDomain.getMemberAmount()) && resultDomain.getMemberAmount().compareTo(new BigDecimal(0)) > 0){
+            totalAmount = totalAmount.add(resultDomain.getMemberAmount());
+        }
+        memberDomain.setMemberAmount(totalAmount);
+        memberDao.update(memberDomain);
+        ImpulseModel impulseModel = new ImpulseModel();
+        impulseModel.setImpulseAmount(memberModel.getAmount());
+        impulseModel.setMemberId(memberDomain.getMemberId());
+        impulseModel.setImpulseType(StringUtils.isNull(userBean) ? MemberConstant.IMPULSE_TYPE_ADMIN : MemberConstant.IMPULSE_TYPE_MY);
+        impulseModel.setPayType(MemberConstant.PAY_TYPE_WEIXIN);
+        impulseService.addImpulse(impulseModel);
+    }
+
+    /**
      * 验证会员编号
      * @param memberModel
      * @throws MessageException
      */
     private void checkMemberId(MemberModel memberModel) throws MessageException{
         if(StringUtils.isNull(memberModel.getMemberId())){
-            throw new MessageException(Manager.getMessage(Manager.getMessage(MemberMessage.MEB1005)));
+            throw new MessageException(Manager.getMessage(Manager.getMessage(MemberMessage.MEB1001,Manager.getMessage(MemberMessage.MEB1005))));
         }
     }
 

@@ -12,6 +12,7 @@ public class MemberModel {
     private String memberAge;
     private String memberSex;
     private String memberBirthday;
+    private String amount;
 
     public String getMemberName() {
         return memberName;
@@ -67,5 +68,13 @@ public class MemberModel {
 
     public void setMemberBirthday(String memberBirthday) {
         this.memberBirthday = memberBirthday;
+    }
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
     }
 }

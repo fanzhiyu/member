@@ -36,7 +36,18 @@
     select 
     <include refid="Base_Column_List" />
     from sys_user
-    where USER_ID = #{userId,jdbcType=VARCHAR}
+    <where>
+      1=1
+      <if test="userId != null and userId != ''">
+        and USER_ID = #{userId,jdbcType=VARCHAR}
+      </if>
+      <if test="userName != null and userName != ''">
+        and USER_NAME = #{userName,jdbcType=VARCHAR}
+      </if>
+      <if test="userPassword != null and userPassword != ''">
+        and USER_PASSWORD = #{userPassword,jdbcType=VARCHAR}
+      </if>
+    </where>
   </select>
   <delete id="delete" parameterType="java.lang.String">
     <!--

@@ -71,4 +71,16 @@ public class MemberController {
         memberService.deleteMember(memberModel);
         return ResponseUtil.success();
     }
+
+    /**
+     * 会员充值
+     * @param memberModel
+     * @return
+     * @throws MessageException
+     */
+    @RequestMapping(value = "/rechargeMember", method = RequestMethod.POST)
+    public ResponseEntity rechargeMember(@ModelAttribute MemberModel memberModel) throws MessageException{
+        memberService.rechargeMember(memberModel);
+        return ResponseUtil.success();
+    }
 }

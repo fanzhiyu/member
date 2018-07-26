@@ -1,10 +1,13 @@
 package com.member.impulse.domain;
 
+import com.easy.core.annotation.Column;
+import com.easy.core.annotation.Table;
 import com.member.impulse.dto.ImpulseDto;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
+@Table(name = "sys_impulse")
 public class ImpulseDomain extends ImpulseDto{
     /**
      *
@@ -13,6 +16,7 @@ public class ImpulseDomain extends ImpulseDto{
      *
      * @mbg.generated Thu Jul 19 10:36:00 CST 2018
      */
+    @Column(id = "IMPULSE_ID",increment = true,length = 12,rule = "IM")
     private String impulseId;
 
     /**

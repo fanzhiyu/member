@@ -7,7 +7,7 @@ import com.easy.core.domain.Domain;
  */
 public class UserDto extends Domain {
 
-    private final static String SQL_ID = "UserDao.";
+    private final static String SQL_ID = "com.member.user.dao.UserDao.";
 
     @Override
     public String getSqlId() {

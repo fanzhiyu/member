@@ -52,6 +52,51 @@
     from sys_consume
     where CONSUME_ID = #{consumeId,jdbcType=VARCHAR}
   </select>
+  <select id="findPaging" parameterType="com.member.consume.domain.ConsumeDomain" resultType="com.member.consume.domain.ConsumeDomain">
+    select
+      A.CONSUME_ID AS consumeId,
+      A.MEMBER_ID AS memberId,
+      A.CONSUME_AMOUNT AS consumeAmount,
+      A.CONSUME_CONTENT AS consumeContent,
+      A.CREATER AS CREATER,
+      A.CREATE_TIME AS createTime,
+      A.UPDATER AS updater,
+      A.UPDATE_TIME AS updateTime,
+      B.MEMBER_NAME AS memberName
+    from sys_consume A
+    LEFT JOIN sys_member B ON(A.MEMBER_ID=B.MEMBER_ID)
+    <where>
+      1=1
+      <if test="memberId != null and memberId != ''">
+        and B.MEMBER_ID = #{memberId,jdbcType=VARCHAR}
+      </if>
+      <if test="startDate != null and startDate != ''">
+        and A.CREATE_TIME <![CDATA[ >= ]]> #{startDate,jdbcType=VARCHAR}
+      </if>
+      <if test="endDate != null and endDate != ''">
+        and A.CREATE_TIME <![CDATA[ <= ]]> #{endDate,jdbcType=VARCHAR}
+      </if>
+    </where>
+    LIMIT #{pageStart},#{pageEnd}
+  </select>
+  <select id="findCount" parameterType="com.member.consume.domain.ConsumeDomain" resultType="com.member.consume.domain.ConsumeDomain">
+    select
+      count(*) as count
+    from sys_consume A
+    LEFT JOIN sys_member B ON(A.MEMBER_ID=B.MEMBER_ID)
+    <where>
+      1=1
+      <if test="memberId != null and memberId != ''">
+        and B.MEMBER_ID = #{memberId,jdbcType=VARCHAR}
+      </if>
+      <if test="startDate != null and startDate != ''">
+        and A.CREATE_TIME <![CDATA[ >= ]]> #{startDate,jdbcType=VARCHAR}
+      </if>
+      <if test="endDate != null and endDate != ''">
+        and A.CREATE_TIME <![CDATA[ <= ]]> #{endDate,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
   <delete id="delete" parameterType="java.lang.String">
     <!--
       WARNING - @mbg.generated

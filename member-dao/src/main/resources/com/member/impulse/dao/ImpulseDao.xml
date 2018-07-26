@@ -37,6 +37,64 @@
     from sys_impulse
     where IMPULSE_ID = #{impulseId,jdbcType=VARCHAR}
   </select>
+  <select id="findPaging" parameterType="com.member.impulse.domain.ImpulseDomain" resultType="com.member.impulse.domain.ImpulseDomain">
+    SELECT
+      A.IMPULSE_ID as impulseId,
+      A.MEMBER_ID as memberId,
+      A.IMPULSE_AMOUNT as impulseAmount,
+      A.IMPULSE_TYPE as impulseType,
+      A.PAY_TYPE as payType,
+      A.CREATER as creater,
+      A.CREATE_TIME as createTime,
+      A.UPDATER as updater,
+      A.UPDATE_TIME as updateTime,
+      B.MEMBER_NAME as memberName
+    from sys_impulse A
+    LEFT JOIN sys_member B ON (A.MEMBER_ID = B.MEMBER_ID)
+    <where>
+      1=1
+      <if test="memberName != null and memberName != ''">
+        AND B.MEMBER_NAME = #{memberName,jdbcType=VARCHAR}
+      </if>
+      <if test="payType != null and payType != ''">
+        AND A.PAY_TYPE = #{payType,jdbcType=VARCHAR}
+      </if>
+      <if test="startDate != null and startDate != ''">
+        and A.CREATE_TIME <![CDATA[ >= ]]> #{startDate,jdbcType=VARCHAR}
+      </if>
+      <if test="endDate != null and endDate != ''">
+        and A.CREATE_TIME <![CDATA[ <= ]]> #{endDate,jdbcType=VARCHAR}
+      </if>
+      <if test="memberId != null and memberId != ''">
+        and B.MEMBER_ID = #{memberId,jdbcType=VARCHAR}
+      </if>
+    </where>
+    LIMIT #{pageStart},#{pageEnd}
+  </select>
+  <select id="findCount" parameterType="com.member.impulse.domain.ImpulseDomain" resultType="com.member.impulse.domain.ImpulseDomain">
+    SELECT
+      COUNT(*) AS count
+    from sys_impulse A
+    LEFT JOIN sys_member B ON (A.MEMBER_ID = B.MEMBER_ID)
+    <where>
+      1=1
+      <if test="memberName != null and memberName != ''">
+        AND B.MEMBER_NAME = #{memberName,jdbcType=VARCHAR}
+      </if>
+      <if test="payType != null and payType != ''">
+        AND A.PAY_TYPE = #{payType,jdbcType=VARCHAR}
+      </if>
+      <if test="startDate != null and startDate != ''">
+        and A.CREATE_TIME <![CDATA[ >= ]]> #{startDate,jdbcType=VARCHAR}
+      </if>
+      <if test="endDate != null and endDate != ''">
+        and A.CREATE_TIME <![CDATA[ <= ]]> #{endDate,jdbcType=VARCHAR}
+      </if>
+      <if test="memberId != null and memberId != ''">
+        and B.MEMBER_ID = #{memberId,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
   <delete id="delete" parameterType="java.lang.String">
     <!--
       WARNING - @mbg.generated

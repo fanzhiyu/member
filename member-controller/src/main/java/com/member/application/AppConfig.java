@@ -3,6 +3,9 @@ package com.member.application;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.easy.core.util.JwtUtil;
 import com.easy.core.util.UserUtils;
+import com.member.core.bean.TranslateBean;
+import com.member.core.config.Config;
+import com.member.core.filter.AppFilter;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -24,7 +27,7 @@ import javax.sql.DataSource;
 @ComponentScan(basePackages = {"com.member.*.controller","com.member.*.dao.*",
         "com.member.*.service.*"})
 @EnableTransactionManagement
-public class Config {
+public class AppConfig {
 
     @Autowired
     private DatasourceBean datasourceBean;
@@ -68,4 +71,18 @@ public class Config {
         return new UserUtils();
     }
 
+    @Bean
+    public Config config(){
+        return new Config();
+    }
+
+    @Bean
+    public AppFilter easyFilter(){
+        return new AppFilter();
+    }
+
+    @Bean
+    public TranslateBean translateBean(){
+        return new TranslateBean();
+    }
 }

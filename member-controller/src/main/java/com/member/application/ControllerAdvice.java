@@ -4,7 +4,7 @@ import com.easy.core.constant.Constant;
 import com.easy.core.exception.MessageException;
 import com.easy.core.manager.Manager;
 import com.easy.core.util.ResponseUtil;
-import com.member.core.contant.MemberMessage;
+import com.member.core.contsant.MemberMessage;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.omg.CORBA.SystemException;
 import org.slf4j.Logger;

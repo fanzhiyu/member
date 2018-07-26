@@ -14,6 +14,7 @@ public class MemberPager extends PagingModel<MemberPager>{
     private String memberAge;
     private String memberSex;
     private String memberBirthday;
+    private String memberAmount;
     private String createTime;
     private String startDate;
     private String endDate;
@@ -64,6 +65,14 @@ public class MemberPager extends PagingModel<MemberPager>{
 
     public void setMemberSex(String memberSex) {
         this.memberSex = memberSex;
+    }
+
+    public String getMemberAmount() {
+        return memberAmount;
+    }
+
+    public void setMemberAmount(String memberAmount) {
+        this.memberAmount = memberAmount;
     }
 
     public String getMemberBirthday() {

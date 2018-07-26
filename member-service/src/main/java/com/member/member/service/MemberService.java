@@ -39,4 +39,12 @@ public interface MemberService {
      * @throws MessageException
      */
     public void deleteMember(MemberModel memberModel) throws MessageException;
+
+    /**
+     * 会员充值
+     * @param memberModel
+     * @throws MessageException
+     */
+    public void rechargeMember(MemberModel memberModel) throws MessageException;
+
 }

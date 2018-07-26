@@ -1,10 +1,13 @@
 package com.member.consume.domain;
 
+import com.easy.core.annotation.Column;
+import com.easy.core.annotation.Table;
 import com.member.consume.dto.ConsumeDto;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
+@Table(name = "sys_consume")
 public class ConsumeDomain extends ConsumeDto{
     /**
      *
@@ -13,6 +16,7 @@ public class ConsumeDomain extends ConsumeDto{
      *
      * @mbg.generated Thu Jul 19 10:36:00 CST 2018
      */
+    @Column(id = "consume_id", increment = true, length = 12, rule = "CS")
     private String consumeId;
 
     /**

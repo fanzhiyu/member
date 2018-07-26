@@ -8,7 +8,7 @@ security:
     enabled: false
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/jeesite_20170808?useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://localhost:3306/member?useUnicode=true&characterEncoding=utf-8
     username: root
     password:
     driver: com.mysql.jdbc.Driver
@@ -20,12 +20,11 @@ profiles:
   secret: 7786df7fc3a34e26a61c034d5ec8245d
 
 config:
-  auth: false
-  filter: false
-  filterUrl: /user/signToken,.js,.css,.png,.jpg,.html,.ico
+  auth: true
+  filter: true
+  filterUrl: /user/login,/user/getValidate,/member/saveMember,.js,.css,.png,.jpg,.html,.ico
 
-qiniu:
-  accessKey: v5mdxW_QsSCmIuiMnqIbvWOHNvuBcq78fRnd604e
-  secretKey: ZPRFvxc84-41VPusVxgccx3JEG1342AvezP5GKde
-  bucket: damon
-  url: http://oupq1rfmo.bkt.clouddn.com/
+translate:
+  url: http://openapi.openspeech.cn/webapi/its.do
+  appId: 5b2b6096
+  apikey: d0c127d3ac5aa77e8af53d2a3e5c3cd5

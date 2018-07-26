@@ -12,6 +12,8 @@ public class SaveMemberModel {
     private String memberAge;
     private String memberSex;
     private String memberBirthday;
+    private String memberPassword;
+    private String memberHeaderImg;
 
     public String getMemberName() {
         return memberName;
@@ -67,5 +69,21 @@ public class SaveMemberModel {
 
     public void setMemberBirthday(String memberBirthday) {
         this.memberBirthday = memberBirthday;
+    }
+
+    public String getMemberPassword() {
+        return memberPassword;
+    }
+
+    public void setMemberPassword(String memberPassword) {
+        this.memberPassword = memberPassword;
+    }
+
+    public String getMemberHeaderImg() {
+        return memberHeaderImg;
+    }
+
+    public void setMemberHeaderImg(String memberHeaderImg) {
+        this.memberHeaderImg = memberHeaderImg;
     }
 }
